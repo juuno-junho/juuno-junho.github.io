@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jun Ho Lee — IT PMO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #003087;
+      --navy-dark: #001f5b;
+      --navy-mid:  #1a4aad;
+      --blue-light: #6eb0ff;
+      --sky:       #e8f0fc;
+      --sky-mid:   #c5d8f5;
+      --red:       #e8002d;
+      --orange:    #e86a2e;
+      --green:     #52a673;
+      --white:     #ffffff;
+      --off-white: #f7f9fc;
+      --gray-100:  #eef1f6;
+      --gray-300:  #c3cad8;
+      --gray-500:  #7a8499;
+      --gray-700:  #3d4559;
+      --text:      #1a2240;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Noto Sans KR', 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      padding: 8px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    .topbar a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 20px; transition: color 0.2s; }
+    .topbar a:hover { color: var(--white); }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      border-bottom: 3px solid var(--navy);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,48,135,0.10);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 70px;
+    }
+    .logo-block { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-mark {
+      width: 42px; height: 42px;
+      background: var(--navy); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 15px;
+    }
+    .logo-name { display: block; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; color: var(--navy); }
+    .logo-role { display: block; font-size: 11px; color: var(--gray-500); font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+    nav { display: flex; align-items: center; gap: 2px; }
+    nav a {
+      padding: 8px 16px; font-size: 13px; font-weight: 500;
+      color: var(--gray-700); text-decoration: none; border-radius: 4px;
+      transition: all 0.2s; font-family: 'Montserrat', sans-serif;
+    }
+    nav a:hover { background: var(--sky); color: var(--navy); }
+    .nav-cta { background: var(--navy) !important; color: var(--white) !important; margin-left: 8px; }
+    .nav-cta:hover { background: var(--navy-mid) !important; }
+
+    /* HERO */
+    #hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+      position: relative; overflow: hidden;
+      padding: 90px 60px; min-height: 520px;
+      display: flex; align-items: center;
+    }
+    #hero::before {
+      content: ''; position: absolute; right: -80px; top: -80px;
+      width: 540px; height: 540px;
+      border: 80px solid rgba(255,255,255,0.05); border-radius: 50%;
+    }
+    #hero::after {
+      content: ''; position: absolute; right: 100px; bottom: -120px;
+      width: 360px; height: 360px;
+      border: 60px solid rgba(255,255,255,0.04); border-radius: 50%;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: 60px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .hero-badge {
+      background: var(--red); color: var(--white);
+      font-size: 10px; font-weight: 700; padding: 5px 12px;
+      border-radius: 2px; letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .hero-badge-line { flex: 1; max-width: 60px; height: 1px; background: rgba(255,255,255,0.2); }
+    .hero-org { color: rgba(255,255,255,0.45); font-size: 11px; font-family: 'Montserrat', sans-serif; letter-spacing: 0.1em; }
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(44px, 6vw, 72px); font-weight: 800;
+      color: var(--white); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 20px;
+    }
+    .hero-title .accent { color: var(--blue-light); }
+    .hero-desc { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 480px; margin-bottom: 36px; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; font-size: 13px; font-weight: 600;
+      font-family: 'Montserrat', sans-serif; letter-spacing: 0.04em;
+      border-radius: 4px; text-decoration: none; transition: all 0.22s;
+      cursor: pointer; border: none;
+    }
+    .btn-white { background: var(--white); color: var(--navy); }
+    .btn-white:hover { background: var(--sky); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    .btn-outline { border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); background: transparent; }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+    /* Hero card */
+    .hero-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 32px;
+      backdrop-filter: blur(12px);
+    }
+    .hero-card-label {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 22px;
+      padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .profile-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .avatar {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--blue-light), var(--navy));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 18px;
+      color: var(--white); flex-shrink: 0; border: 2px solid rgba(255,255,255,0.2);
+    }
+    .p-name { color: var(--white); font-weight: 700; font-size: 16px; font-family: 'Montserrat', sans-serif; }
+    .p-role { color: rgba(255,255,255,0.45); font-size: 12px; margin-top: 2px; }
+    .info-list { display: flex; flex-direction: column; gap: 0; }
+    .info-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 12px;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-key { color: rgba(255,255,255,0.38); font-family: 'Montserrat', sans-serif; }
+    .info-val { color: var(--white); font-weight: 500; font-family: 'Montserrat', sans-serif; }
+    .status-live { display: flex; align-items: center; gap: 6px; }
+    .dot-green { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.3)} }
+
+    /* STATS */
+    .stats-bar { background: var(--navy-dark); padding: 32px 60px; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .stat-block { text-align: center; position: relative; padding: 0 16px; }
+    .stat-block:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 10%; bottom: 10%;
+      width: 1px; background: rgba(255,255,255,0.1);
+    }
+    .stat-num { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: var(--blue-light); line-height: 1; display: block; }
+    .stat-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 6px; font-family: 'Montserrat', sans-serif; letter-spacing: 0.06em; }
+
+    /* SECTIONS */
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
+    .sec-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; padding-bottom: 18px; border-bottom: 2px solid var(--gray-100); }
+    .sec-eye { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .sec-title { font-family: 'Montserrat', sans-serif; font-size: clamp(24px, 3vw, 34px); font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+
+    /* ABOUT */
+    #about { background: var(--off-white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .about-text p { font-size: 15px; line-height: 1.9; color: var(--gray-700); margin-bottom: 16px; }
+    .about-text p strong { color: var(--navy); font-weight: 700; }
+    .about-quote {
+      background: var(--sky); border-left: 4px solid var(--navy);
+      padding: 18px 22px; border-radius: 0 6px 6px 0; margin-top: 24px;
+    }
+    .about-quote p { font-size: 13px; color: var(--navy); line-height: 1.7; margin: 0; font-weight: 500; }
+    .about-cards { display: flex; flex-direction: column; gap: 14px; }
+    .about-card {
+      background: var(--white); border: 1px solid var(--gray-100);
+      border-radius: 8px; padding: 22px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: all 0.25s; box-shadow: 0 2px 8px rgba(0,48,135,0.04);
+    }
+    .about-card:hover { border-color: var(--sky-mid); box-shadow: 0 8px 28px rgba(0,48,135,0.10); transform: translateY(-2px); }
+    .card-icon { width: 42px; height: 42px; background: var(--sky); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
+    .about-card h3 { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .about-card p { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+
+    /* ══════════════════════════════════
+       CONNECTOR SECTION  (신규)
+    ══════════════════════════════════ */
+    #connector { background: var(--white); }
+
+    .connector-intro {
+      font-size: 15px; line-height: 1.9; color: var(--gray-700);
+      max-width: 720px; margin-bottom: 56px;
+    }
+    .connector-intro strong { color: var(--navy); font-weight: 700; }
+
+    /* Flow diagram */
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .flow-box {
+      padding: 20px 32px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 160px;
+    }
+    .flow-box.biz {
+      background: var(--navy-dark);
+      color: var(--white);
+    }
+    .flow-box.it {
+      background: var(--navy-dark);
+      color: var(--white);
+    }
+    .flow-box.me {
+      background: var(--navy);
+      border: 3px solid var(--blue-light);
+      color: var(--white);
+      box-shadow: 0 8px 32px rgba(46,107,230,0.35);
+      transform: scale(1.08);
+    }
+    .flow-box-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px; font-weight: 800;
+      display: block; margin-bottom: 4px;
+    }
+    .flow-box-sub {
+      font-size: 11px; opacity: 0.7;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.04em;
+    }
+    .flow-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; color: var(--gray-500);
+      letter-spacing: 0.05em;
+    }
+
+    .flow-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 20px;
+    }
+    .flow-arrow-icon {
+      font-size: 24px;
+      color: var(--navy-mid);
+      line-height: 1;
+    }
+    .flow-arrow-desc {
+      font-size: 10px;
+      color: var(--gray-500);
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.05em;
+      text-align: center;
+      max-width: 90px;
+      line-height: 1.4;
+    }
+
+    /* Three role cards */
+    .connector-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .conn-card {
+      border-radius: 10px;
+      padding: 28px 24px;
+      border: 1px solid var(--gray-100);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .conn-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .conn-card.blue::before  { background: var(--navy); }
+    .conn-card.orange::before { background: var(--orange); }
+    .conn-card.green::before  { background: var(--green); }
+    .conn-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,48,135,0.12); }
+
+    .conn-card-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 14px; display: block;
+    }
+    .conn-card.blue  .conn-card-num  { color: var(--navy); }
+    .conn-card.orange .conn-card-num { color: var(--orange); }
+    .conn-card.green  .conn-card-num { color: var(--green); }
+
+    .conn-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px; font-weight: 800;
+      color: var(--navy); margin-bottom: 10px; line-height: 1.3;
+    }
+    .conn-card-body {
+      font-size: 13px; line-height: 1.75; color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+    .conn-card-body strong { color: var(--gray-700); font-weight: 600; }
+    .conn-tag {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 3px;
+      background: var(--sky); color: var(--navy);
+      margin-right: 4px; margin-top: 4px;
+    }
+
+    /* EXPERTISE */
+    #expertise { background: var(--off-white); }
+    .exp-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .exp-card {
+      border: 1px solid var(--gray-100); border-radius: 10px; padding: 30px 26px;
+      transition: all 0.25s; position: relative; overflow: hidden;
+      background: var(--white);
+    }
+    .exp-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--navy); transform: scaleX(0); transform-origin: left; transition: transform 0.35s;
+    }
+    .exp-card:hover::before { transform: scaleX(1); }
+    .exp-card:hover { box-shadow: 0 12px 40px rgba(0,48,135,0.12); transform: translateY(-4px); border-color: var(--sky-mid); }
+    .exp-icon { font-size: 30px; margin-bottom: 16px; display: block; }
+    .exp-title { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .exp-desc { font-size: 13px; line-height: 1.75; color: var(--gray-500); margin-bottom: 18px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; background: var(--sky); color: var(--navy); border-radius: 3px; }
+
+    /* VIBE */
+    #vibe { background: var(--white); }
+    .vibe-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; }
+    .vibe-text h3 { font-family: 'Montserrat', sans-serif; font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 18px; }
+    .vibe-text h3 span { color: var(--navy-mid); }
+    .vibe-text p { font-size: 14px; line-height: 1.8; color: var(--gray-700); margin-bottom: 14px; }
+    .steps { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num { width: 30px; height: 30px; background: var(--navy); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .step h4 { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .step p { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+    .terminal { background: #0f1724; border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,48,135,0.2); border: 1px solid rgba(255,255,255,0.05); }
+    .term-bar { background: #1c2840; padding: 12px 18px; display: flex; align-items: center; gap: 7px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dr { background: #ff5f57; } .dy { background: #febc2e; } .dg { background: #28c840; }
+    .term-ttl { font-family: 'Montserrat', monospace; font-size: 11px; color: rgba(255,255,255,0.3); margin-left: 6px; }
+    .term-body { padding: 24px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 2.1; }
+    .tp { color: var(--blue-light); } .tc { color: #e8f0fc; }
+    .to { color: rgba(255,255,255,0.38); padding-left: 14px; }
+    .tok { color: #4ade80; padding-left: 14px; }
+    .tacc { color: #fbbf24; padding-left: 14px; }
+    .tblink { display: inline-block; width: 7px; height: 13px; background: var(--blue-light); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* CONTACT */
+    #contact { background: var(--navy); }
+    #contact .sec-eye { color: var(--blue-light); }
+    #contact .sec-title { color: var(--white); }
+    #contact .sec-header { border-bottom-color: rgba(255,255,255,0.1); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .contact-intro { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+    .clinks { display: flex; flex-direction: column; gap: 10px; }
+    .clink { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: var(--white); text-decoration: none; transition: all 0.22s; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; }
+    .clink:hover { background: rgba(255,255,255,0.11); border-color: rgba(255,255,255,0.25); transform: translateX(4px); }
+    .clink-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .cform { display: flex; flex-direction: column; gap: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fld { display: flex; flex-direction: column; gap: 6px; }
+    .flabel { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .finput, .ftextarea { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 11px 15px; color: var(--white); font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.2s; }
+    .finput::placeholder, .ftextarea::placeholder { color: rgba(255,255,255,0.22); }
+    .finput:focus, .ftextarea:focus { border-color: var(--blue-light); }
+    .ftextarea { resize: vertical; min-height: 90px; }
+    .btn-submit { background: var(--white); color: var(--navy); align-self: flex-start; border-radius: 4px; padding: 12px 24px; font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; letter-spacing: 0.04em; cursor: pointer; border: none; transition: all 0.22s; }
+    .btn-submit:hover { background: var(--sky); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+    /* FOOTER */
+    footer { background: var(--navy-dark); padding: 26px 60px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.07); }
+    .foot-l { display: flex; align-items: center; gap: 12px; }
+    .foot-mark { width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 10px; color: rgba(255,255,255,0.55); }
+    .foot-txt { font-family: 'Montserrat', sans-serif; font-size: 11px; color: rgba(255,255,255,0.3); }
+    .foot-r { font-family: 'Montserrat', sans-serif; font-size: 11px; color: rgba(255,255,255,0.22); letter-spacing: 0.04em; }
+    .foot-acc { color: var(--blue-light); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+    @media (max-width: 900px) {
+      .topbar { display: none; }
+      .header-inner { padding: 0 24px; }
+      nav { display: none; }
+      #hero { padding: 70px 24px; }
+      .hero-inner, .about-grid, .exp-grid, .connector-cards, .vibe-grid, .contact-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .wrap { padding: 60px 24px; }
+      .stats-bar { padding: 28px 24px; }
+      footer { flex-direction: column; gap: 10px; padding: 22px 24px; text-align: center; }
+      .flow-diagram { gap: 0; }
+      .flow-arrow { padding: 0 8px; }
+      .flow-box { min-width: 110px; padding: 16px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span>SFMI · IT Project Management Office</span>
+    <div><a href="#about">About</a><a href="#connector">Connector</a><a href="#expertise">Expertise</a><a href="#contact">Contact</a></div>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <a class="logo-block" href="#">
+        <div class="logo-mark">JHL</div>
+        <div>
+          <span class="logo-name">Jun Ho Lee</span>
+          <span class="logo-role">IT PMO · SFMI</span>
+        </div>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#connector">Connector</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#vibe">Vibe Coding</a>
+        <a href="#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge-row">
+          <div class="hero-badge">IT PMO</div>
+          <div class="hero-badge-line"></div>
+          <span class="hero-org">SFMI · Samsung Fire &amp; Marine Insurance</span>
+        </div>
+        <h1 class="hero-title">Jun Ho<br><span class="accent">Lee</span></h1>
+        <p class="hero-desc">
+          현업 비즈니스와 IT 개발 사이를 연결하는 <strong style="color:#fff;">Connector</strong> —
+          IT 프로젝트를 기획·조율하고, 이제는 AI와 함께 직접 만드는 Builder로 진화 중입니다.
+        </p>
+        <div class="hero-buttons">
+          <a href="#connector" class="btn btn-white">Connector 역할 보기 →</a>
+          <a href="#contact" class="btn btn-outline">연락하기</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-label">Profile Overview</div>
+        <div class="profile-row">
+          <div class="avatar">JL</div>
+          <div>
+            <div class="p-name">Jun Ho Lee</div>
+            <div class="p-role">IT PMO @ SFMI</div>
+          </div>
+        </div>
+        <div class="info-list">
+          <div class="info-item"><span class="info-key">Organization</span><span class="info-val">SFMI</span></div>
+          <div class="info-item"><span class="info-key">Role</span><span class="info-val">IT PMO · Connector</span></div>
+          <div class="info-item"><span class="info-key">Interests</span><span class="info-val">Vibe Coding</span></div>
+          <div class="info-item">
+            <span class="info-key">Status</span>
+            <span class="info-val status-live"><span class="dot-green"></span>Connector → Builder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-block"><span class="stat-num">IT PMO</span><div class="stat-sub">Current Role</div></div>
+      <div class="stat-block"><span class="stat-num">🔗</span><div class="stat-sub">Biz ↔ IT Connector</div></div>
+      <div class="stat-block"><span class="stat-num">🌱</span><div class="stat-sub">Vibe Coding Chobo</div></div>
+      <div class="stat-block"><span class="stat-num">∞</span><div class="stat-sub">Curiosity</div></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-header">
+        <div><div class="sec-eye">01 · About</div><div class="sec-title">About Me</div></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>안녕하세요! 저는 <strong>SFMI(삼성화재)</strong>의 IT PMO 담당자 <strong>Jun Ho Lee</strong>입니다.</p>
+          <p>현업의 업무 요건과 IT 개발자 사이를 연결하는 <strong>Connector</strong> 역할을 핵심으로 삼아, IT 프로젝트의 기획·거버넌스·이해관계자 소통을 담당합니다.</p>
+          <p>최근에는 <strong>Vibe Coding</strong>을 접하며 AI 도구와 함께 개발을 탐험하고 있습니다. Connector에서 <strong>Builder</strong>로 진화 중입니다.</p>
+          <div class="about-quote">
+            <p>💡 "이 웹사이트도 Claude와의 협업으로 탄생했습니다 — 코드 한 줄 직접 타이핑하지 않고요."</p>
+          </div>
+        </div>
+        <div class="about-cards reveal d1">
+          <div class="about-card">
+            <div class="card-icon">🔗</div>
+            <div><h3>Biz ↔ IT Connector</h3><p>현업 요구사항을 IT 언어로 번역하고, 개발 결과를 비즈니스 가치로 연결</p></div>
+          </div>
+          <div class="about-card">
+            <div class="card-icon">🗂️</div>
+            <div><h3>IT Project Governance</h3><p>포트폴리오 관리, 리스크 모니터링, 프로젝트 거버넌스 체계 수립 및 운영</p></div>
+          </div>
+          <div class="about-card">
+            <div class="card-icon">⚡</div>
+            <div><h3>Vibe Coding (초보)</h3><p>AI 협업 개발 탐험 중 — Claude와 함께 아이디어를 실제 결과물로 만들기</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CONNECTOR SECTION  ★ 핵심 신규 섹션
+  ══════════════════════════════════ -->
+  <section id="connector">
+    <div class="wrap">
+      <div class="sec-header reveal">
+        <div>
+          <div class="sec-eye">02 · Core Role</div>
+          <div class="sec-title">나는 Connector입니다</div>
+        </div>
+      </div>
+
+      <p class="connector-intro reveal">
+        IT PMO의 가장 중요한 역할은 <strong>현업(Biz)의 업무 요건</strong>과 <strong>IT 개발팀</strong> 사이의 간극을 메우는 것입니다.
+        요구사항을 IT 언어로 번역하고, 개발 결과를 비즈니스 가치로 연결합니다.
+        서비스 기획까지 삼각형의 중심에서 세 축을 동시에 조율하는 것이 저의 핵심 역할입니다.
+      </p>
+
+      <!-- Flow Diagram -->
+      <div class="flow-diagram reveal">
+        <div class="flow-node">
+          <div class="flow-box biz">
+            <span class="flow-box-title">현업 (Biz)</span>
+            <span class="flow-box-sub">업무 요건 · 보험 도메인</span>
+          </div>
+          <span class="flow-label">업무 요건 전달</span>
+        </div>
+
+        <div class="flow-arrow">
+          <span class="flow-arrow-icon">⟷</span>
+          <span class="flow-arrow-desc">요건 분석<br>우선순위 조율</span>
+        </div>
+
+        <div class="flow-node">
+          <div class="flow-box me">
+            <span class="flow-box-title">이준호</span>
+            <span class="flow-box-sub">IT PMO · Connector</span>
+          </div>
+          <span class="flow-label" style="color:var(--navy);font-weight:700;">중심 조율자</span>
+        </div>
+
+        <div class="flow-arrow">
+          <span class="flow-arrow-icon">⟷</span>
+          <span class="flow-arrow-desc">개발 결과<br>가치 전환</span>
+        </div>
+
+        <div class="flow-node">
+          <div class="flow-box it">
+            <span class="flow-box-title">IT 개발팀</span>
+            <span class="flow-box-sub">시스템 · 개발 · 운영</span>
+          </div>
+          <span class="flow-label">개발 결과 가치화</span>
+        </div>
+
+        <div class="flow-arrow">
+          <span class="flow-arrow-icon">⟷</span>
+          <span class="flow-arrow-desc">서비스<br>완성도 검증</span>
+        </div>
+
+        <div class="flow-node">
+          <div class="flow-box biz" style="background:var(--navy-mid);">
+            <span class="flow-box-title">서비스 기획</span>
+            <span class="flow-box-sub">UX · 프로세스 설계</span>
+          </div>
+          <span class="flow-label">기획 요건 반영</span>
+        </div>
+      </div>
+
+      <!-- Three detail cards -->
+      <div class="connector-cards">
+        <div class="conn-card blue reveal">
+          <span class="conn-card-num">🔗  역할 01</span>
+          <div class="conn-card-title">Biz ↔ IT<br>요건 번역가</div>
+          <p class="conn-card-body">
+            보험 현업 담당자의 <strong>업무 요건</strong>을 IT 개발팀이 이해할 수 있는 언어로 번역합니다.
+            기술적 실현 가능성과 비즈니스 가치를 동시에 고려하여 명확한 요구사항을 정의합니다.
+          </p>
+          <span class="conn-tag">요건 분석</span>
+          <span class="conn-tag">명세 작성</span>
+          <span class="conn-tag">우선순위 조율</span>
+        </div>
+
+        <div class="conn-card orange reveal d1">
+          <span class="conn-card-num">🔄  역할 02</span>
+          <div class="conn-card-title">IT Project<br>거버넌스 관리</div>
+          <p class="conn-card-body">
+            현업·IT·서비스 기획 세 축의 <strong>이해관계를 조율</strong>하고 프로젝트가 올바른 방향으로 나아가도록 거버넌스 체계를 운영합니다.
+            의사결정 지점마다 합의를 이끌어냅니다.
+          </p>
+          <span class="conn-tag">PMO</span>
+          <span class="conn-tag">리스크 관리</span>
+          <span class="conn-tag">이해관계자</span>
+        </div>
+
+        <div class="conn-card green reveal d2">
+          <span class="conn-card-num">🚀  역할 03</span>
+          <div class="conn-card-title">Connector →<br>Builder 진화</div>
+          <p class="conn-card-body">
+            Connector 역량을 AI로 증폭시켜 <strong>혼자서도 기획부터 개발까지</strong> 완결하는 Builder로 진화 중입니다.
+            Vibe Coding으로 아이디어를 직접 결과물로 만듭니다.
+          </p>
+          <span class="conn-tag">Vibe Coding</span>
+          <span class="conn-tag">AI 협업</span>
+          <span class="conn-tag">Builder</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise">
+    <div class="wrap">
+      <div class="sec-header">
+        <div><div class="sec-eye">03 · Expertise</div><div class="sec-title">Key Capabilities</div></div>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card reveal">
+          <span class="exp-icon">📊</span>
+          <div class="exp-title">Project Governance</div>
+          <p class="exp-desc">IT 프로젝트 포트폴리오 전반의 가시성 확보, 리스크 관리, 성과 추적을 통한 조직적 IT 거버넌스 구현</p>
+          <div class="tags"><span class="tag">PMO</span><span class="tag">Portfolio</span><span class="tag">Risk</span></div>
+        </div>
+        <div class="exp-card reveal d1">
+          <span class="exp-icon">🔄</span>
+          <div class="exp-title">Process Coordination</div>
+          <p class="exp-desc">복잡한 이해관계자 구조 속에서 프로젝트 방향성 조율, 의사결정 촉진, 실행 계획 수립 및 관리</p>
+          <div class="tags"><span class="tag">Communication</span><span class="tag">Planning</span></div>
+        </div>
+        <div class="exp-card reveal d2">
+          <span class="exp-icon">🤖</span>
+          <div class="exp-title">AI-Assisted Dev</div>
+          <p class="exp-desc">비개발자 관점에서 AI 도구를 활용해 실제 결과물을 만들어내는 Vibe Coding 방법론 탐구 중</p>
+          <div class="tags"><span class="tag">Claude</span><span class="tag">Vibe Coding</span><span class="tag">No-Code</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIBE CODING -->
+  <section id="vibe">
+    <div class="wrap">
+      <div class="sec-header">
+        <div><div class="sec-eye">04 · Vibe Coding</div><div class="sec-title">My Coding Journey</div></div>
+      </div>
+      <div class="vibe-grid">
+        <div class="vibe-text reveal">
+          <h3>AI와 함께<br><span>코딩하는</span><br>비개발자</h3>
+          <p>전통적인 개발 교육 없이도, AI와의 협업으로 웹사이트·도구·자동화를 만들 수 있습니다. Connector 역량에 Builder 능력을 더하는 것이 목표입니다.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div><h4>아이디어 구체화</h4><p>만들고 싶은 것을 명확하게 언어로 표현</p></div></div>
+            <div class="step"><div class="step-num">2</div><div><h4>Claude에게 요청</h4><p>AI가 코드를 생성하고 설명해줌</p></div></div>
+            <div class="step"><div class="step-num">3</div><div><h4>반복 개선</h4><p>피드백으로 계속 다듬어 완성도를 높임</p></div></div>
+          </div>
+        </div>
+        <div class="terminal reveal d1">
+          <div class="term-bar">
+            <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+            <span class="term-ttl">junho@vibe-studio ~ bash</span>
+          </div>
+          <div class="term-body">
+            <div><span class="tp">❯ </span><span class="tc">whoami</span></div>
+            <div class="to">Jun Ho Lee · IT PMO @ SFMI</div>
+            <br>
+            <div><span class="tp">❯ </span><span class="tc">cat connector_role.txt</span></div>
+            <div class="to">Biz (현업)  ↔  이준호  ↔  IT 개발팀</div>
+            <div class="tacc">           Connector & PMO</div>
+            <br>
+            <div><span class="tp">❯ </span><span class="tc">run build --with claude</span></div>
+            <div class="to">▸ Generating portfolio site...</div>
+            <div class="tok">✓ Deployed to GitHub Pages!</div>
+            <br>
+            <div><span class="tp">❯ </span><span class="tc">echo $NEXT_GOAL</span></div>
+            <div class="tok">Connector → Builder 🚀<span class="tblink"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-header">
+        <div><div class="sec-eye">05 · Contact</div><div class="sec-title">Get In Touch</div></div>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="contact-intro">IT 프로젝트, Vibe Coding, 또는 단순한 인사 — 언제든 연락 주세요. 새로운 인연과 아이디어를 환영합니다.</p>
+          <div class="clinks">
+            <a href="mailto:hello@junholee.com" class="clink"><div class="clink-icon">✉️</div>hello@junholee.com</a>
+            <a href="https://github.com/" target="_blank" class="clink"><div class="clink-icon">💻</div>GitHub Profile</a>
+            <a href="https://linkedin.com/" target="_blank" class="clink"><div class="clink-icon">💼</div>LinkedIn</a>
+          </div>
+        </div>
+        <div class="cform reveal d1">
+          <div class="form-row">
+            <div class="fld"><label class="flabel">Name</label><input class="finput" type="text" placeholder="홍길동"/></div>
+            <div class="fld"><label class="flabel">Email</label><input class="finput" type="email" placeholder="name@company.com"/></div>
+          </div>
+          <div class="fld"><label class="flabel">Message</label><textarea class="ftextarea" placeholder="안녕하세요! ..."></textarea></div>
+          <button class="btn-submit">메시지 보내기 →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-l">
+      <div class="foot-mark">JHL</div>
+      <span class="foot-txt">© 2026 Jun Ho Lee · IT PMO @ SFMI</span>
+    </div>
+    <div class="foot-r">Built with <span class="foot-acc">Claude</span> · Vibe Coding Chobo 🌱</div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
