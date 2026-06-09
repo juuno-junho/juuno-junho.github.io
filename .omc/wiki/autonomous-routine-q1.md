@@ -12,7 +12,7 @@ metadata:
 | 루틴 | 스케줄 | ID |
 |------|--------|-----|
 | 서울 날씨 체크 (아침 7시 KST) | `0 22 * * *` UTC | trig_01Atiq62tcy6sJLniejoYoyC |
-| 삼성라이온즈 경기 결과 (저녁 10시 KST) | `0 13 * * *` UTC | trig_0119rdivacBVADTxD9Bs7AkF |
+| 삼성라이온즈 경기 결과 (저녁 10시 30분 KST) | `30 13 * * *` UTC | trig_0119rdivacBVADTxD9Bs7AkF |
 
 ---
 
@@ -29,7 +29,7 @@ metadata:
 - 결과를 `.omc/daily-reports/weather-날짜.md`에 저장
 - 정해진 형식의 요약 블록 출력
 
-**루틴 2 — 삼성라이온즈 경기 결과 (매일 저녁 10시 KST)**
+**루틴 2 — 삼성라이온즈 경기 결과 (매일 저녁 10시 30분 KST)**
 
 경기가 끝난 시간대에 네이버 스포츠에 들어가서 삼성 이겼는지 확인하는 행동을 자동화했다.
 
